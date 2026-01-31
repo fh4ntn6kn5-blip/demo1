@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-white text-gray-900 antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* Custom scrollbar for Feishu-style minimal look */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #E5E7EB;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #D1D5DB;
+}
+
+.hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.ai-status-line {
+  backdrop-filter: blur(6px);
+}
+
+.ai-status-line {
+  position: relative;
+  overflow: hidden;
+  opacity: 0.92;
+  transition: opacity 220ms ease;
+}
+
+.ai-dashboard-insert {
+  animation: aiDashboardIn 420ms ease-out;
+}
+
+@keyframes aiDashboardIn {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.ai-status-line::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(99,102,241,0.12), transparent);
+  transform: translateX(-100%);
+  animation: aiStatusSweep 1200ms ease-in-out;
+  pointer-events: none;
+}
+
+@keyframes aiStatusSweep {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
