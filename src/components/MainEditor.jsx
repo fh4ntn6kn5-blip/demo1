@@ -9,82 +9,60 @@ const sugarAvatar = new URL(
 ).href
 
 const INITIAL_CONTENT_HTML = `
-  <h3 style="font-size:16px;font-weight:600;color:#111827;margin:0 0 10px 0;">部门指标</h3>
-  <div style="border:1px solid #EEF0F3;border-radius:12px;overflow:hidden;margin-bottom:16px;background:#FFFFFF;">
-    <div style="display:grid;grid-template-columns:120px 200px 80px 140px 140px 140px 220px 120px;font-size:12px;font-weight:600;color:#6B7280;background:#F7F8FA;">
-      <div style="padding:8px 10px;border-right:1px solid #EEF0F3;">类型</div>
-      <div style="padding:8px 10px;border-right:1px solid #EEF0F3;">指标名称</div>
-      <div style="padding:8px 10px;border-right:1px solid #EEF0F3;">单位</div>
-      <div style="padding:8px 10px;border-right:1px solid #EEF0F3;">26年目标值</div>
-      <div style="padding:8px 10px;border-right:1px solid #EEF0F3;">26年Q1目标值</div>
-      <div style="padding:8px 10px;border-right:1px solid #EEF0F3;">Q4末基线值</div>
-      <div style="padding:8px 10px;border-right:1px solid #EEF0F3;">计算方法</div>
-      <div style="padding:8px 10px;">备注</div>
-    </div>
-    <div style="display:grid;grid-template-columns:120px 200px 80px 140px 140px 140px 220px 120px;font-size:12px;color:#374151;">
-      <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">公司和业务降本</div>
-      <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">业务工时节省</div>
-      <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">人月</div>
-      <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">800人月（+10%）</div>
-      <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">180人月</div>
-      <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">727.3人月</div>
-      <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">被赋能业务原人工时 - 现人工时</div>
-      <div style="padding:8px 10px;border-top:1px solid #EEF0F3;">Q1:72.8; Q2:153.2</div>
-    </div>
-    <div style="display:grid;grid-template-columns:120px 200px 80px 140px 140px 140px 220px 120px;font-size:12px;color:#374151;">
-      <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">月人均交付需求数</div>
-      <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">平台化赋能交付需求数</div>
-      <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">个</div>
-      <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">-</div>
-      <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">-</div>
-      <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">-</div>
-      <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">各项开放能力赋能业务的交付需求数</div>
-      <div style="padding:8px 10px;border-top:1px solid #EEF0F3;">-</div>
-    </div>
-    <div style="display:grid;grid-template-columns:120px 200px 80px 140px 140px 140px 220px 120px;font-size:12px;color:#374151;">
-      <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">-</div>
-      <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">研发工时节省</div>
-      <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">人月</div>
-      <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">209人月（+10%）</div>
-      <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">50人月</div>
-      <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">190人月</div>
-      <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">开发者原研发工时 - 现研发工时</div>
-      <div style="padding:8px 10px;border-top:1px solid #EEF0F3;">-</div>
-    </div>
-  </div>
-
-  <h3 style="font-size:16px;font-weight:600;color:#111827;margin:0 0 10px 0;">团队关键指标</h3>
-  <div style="border:1px solid #EEF0F3;border-radius:12px;overflow:hidden;margin-bottom:16px;background:#FFFFFF;">
-    <div style="display:grid;grid-template-columns:240px 80px 140px 140px 140px 220px;font-size:12px;font-weight:600;color:#6B7280;background:#F7F8FA;">
-      <div style="padding:8px 10px;border-right:1px solid #EEF0F3;">指标名称</div>
-      <div style="padding:8px 10px;border-right:1px solid #EEF0F3;">单位</div>
-      <div style="padding:8px 10px;border-right:1px solid #EEF0F3;">26年目标值</div>
-      <div style="padding:8px 10px;border-right:1px solid #EEF0F3;">26年Q1目标值</div>
-      <div style="padding:8px 10px;border-right:1px solid #EEF0F3;">Q4末基线值</div>
-      <div style="padding:8px 10px;">计算方法</div>
-    </div>
-    <div style="display:grid;grid-template-columns:240px 80px 140px 140px 140px 220px;font-size:12px;color:#374151;">
-      <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">智能体参与读/写/管理的文档占比</div>
-      <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">%</div>
-      <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">10%</div>
-      <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">5.8%</div>
-      <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">4.8%</div>
-      <div style="padding:8px 10px;border-top:1px solid #EEF0F3;">智能体参与读/写/管理的日均文档数 / 活跃的日均文档数</div>
-    </div>
-    <div style="display:grid;grid-template-columns:240px 80px 140px 140px 140px 220px;font-size:12px;color:#374151;">
-      <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">知识库“随心搭”组件日均交互次数</div>
-      <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">次/日</div>
-      <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">-</div>
-      <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">-</div>
-      <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">-</div>
-      <div style="padding:8px 10px;border-top:1px solid #EEF0F3;">-</div>
-    </div>
-  </div>
-
-  <h3 style="font-size:16px;font-weight:600;color:#111827;margin:0 0 10px 0;">项目进展</h3>
-  <p style="margin:0 0 20px 0;font-size:14px;color:#4B5563;line-height:1.6;">
-    O1：【知识管理】打造人与智能体协同的开放知识库，AI内化实现文档新体验，打通文档上下游断点，赋能工作流提效
+  <h3 style="font-size:18px;font-weight:600;color:#111827;margin:0 0 12px 0;">项目一：随心搭</h3>
+  <p style="margin:0 0 14px 0;color:#374151;line-height:1.7;">
+    知识库“随心搭”优化业务系统API联动和代码质检、拓展沉淀开箱即用组件模板，提升使用频次，释放泛研发生产力。
   </p>
+
+  <h4 style="font-size:14px;font-weight:600;color:#111827;margin:0 0 8px 0;">能力建设</h4>
+  <p style="margin:0 0 10px 0;color:#4B5563;">PM：<span style="color:#3377ff;">@李港</span>；RD：<span style="color:#3377ff;">@谢郁</span> <span style="color:#3377ff;">@贾铮</span></p>
+  <p style="margin:0 0 6px 0;color:#111827;font-weight:600;">1、数据监控</p>
+  <ul style="margin:0 0 10px 18px;color:#4B5563;">
+    <li>本周数据</li>
+    <li style="height:24px;"></li>
+    <li style="margin-top:6px;">累计数据</li>
+  </ul>
+  <p style="margin:0 0 6px 0;color:#111827;font-weight:600;">2、本周上线</p>
+  <ul style="margin:0 0 10px 18px;color:#4B5563;">
+    <li>侧边栏适配</li>
+  </ul>
+  <p style="margin:0 0 6px 0;color:#111827;font-weight:600;">3、本周其他进展</p>
+  <ul style="margin:0 0 16px 18px;color:#4B5563;">
+    <li>后端随心搭一体化</li>
+    <li style="margin-top:6px;">随心搭画布产品化</li>
+  </ul>
+
+  <h4 style="font-size:14px;font-weight:600;color:#111827;margin:0 0 8px 0;">业务赋能</h4>
+  <p style="margin:0 0 6px 0;color:#111827;font-weight:600;">1、本周上线</p>
+  <p style="margin:0 0 12px 0;color:#4B5563;">—</p>
+  <p style="margin:0 0 6px 0;color:#111827;font-weight:600;">2、本周其他进展</p>
+  <p style="margin:0 0 18px 0;color:#4B5563;">—</p>
+
+  <h3 style="font-size:18px;font-weight:600;color:#111827;margin:0 0 12px 0;">项目二：内外协同</h3>
+  <p style="margin:0 0 14px 0;color:#374151;line-height:1.7;">
+    知识库“API/SDK”优化精细化操作技能、简化数字员工调用，扩大应用场景，提升智能体参与读/写/管理的文档占比
+  </p>
+
+  <h4 style="font-size:14px;font-weight:600;color:#111827;margin:0 0 8px 0;">能力建设</h4>
+  <p style="margin:0 0 10px 0;color:#4B5563;">PM：<span style="color:#3377ff;">@李港</span>；RD：<span style="color:#3377ff;">@谢郁</span> <span style="color:#3377ff;">@姚泰南</span> <span style="color:#3377ff;">@侯园梅</span></p>
+  <p style="margin:0 0 6px 0;color:#111827;font-weight:600;">1、数据监控</p>
+  <ul style="margin:0 0 10px 18px;color:#4B5563;">
+    <li>本周数据</li>
+    <li style="height:24px;"></li>
+    <li style="margin-top:6px;">累计数据</li>
+  </ul>
+  <p style="margin:0 0 6px 0;color:#111827;font-weight:600;">2、本周上线</p>
+  <ul style="margin:0 0 10px 18px;color:#4B5563;">
+    <li>侧边栏适配</li>
+  </ul>
+  <p style="margin:0 0 6px 0;color:#111827;font-weight:600;">3、本周其他进展</p>
+  <p style="margin:0 0 16px 0;color:#4B5563;">—</p>
+
+  <h4 style="font-size:14px;font-weight:600;color:#111827;margin:0 0 8px 0;">业务赋能</h4>
+  <p style="margin:0 0 6px 0;color:#111827;font-weight:600;">1、本周上线</p>
+  <p style="margin:0 0 12px 0;color:#4B5563;">—</p>
+  <p style="margin:0 0 6px 0;color:#111827;font-weight:600;">2、本周其他进展</p>
+  <p style="margin:0;color:#4B5563;">—</p>
 `
 
 export default function MainEditor({ docTitle = '未命名文档' }) {
@@ -99,6 +77,14 @@ export default function MainEditor({ docTitle = '未命名文档' }) {
   const [lastInsertHint, setLastInsertHint] = useState('')
   const [isGenerating, setIsGenerating] = useState(false)
   const [generationStep, setGenerationStep] = useState('')
+  const [showContextHint, setShowContextHint] = useState(false)
+  const [contextPanelOpen, setContextPanelOpen] = useState(false)
+  const [contextStep, setContextStep] = useState(0)
+  const [contextDone, setContextDone] = useState(false)
+  const [contextChartReady, setContextChartReady] = useState(false)
+  const [contextSummaryText, setContextSummaryText] = useState('')
+  const [contextChartText, setContextChartText] = useState('')
+  const [contextDataLineCount, setContextDataLineCount] = useState(0)
 
   const editorRef = useRef(null)
   const inputRef = useRef(null)
@@ -108,92 +94,91 @@ export default function MainEditor({ docTitle = '未命名文档' }) {
   const generationTimerRef = useRef([])
   const statusTypeTimerRef = useRef(null)
   const statusLineRef = useRef(null)
+  const contextTimerRef = useRef([])
+  const contextSummaryTimerRef = useRef(null)
+  const contextChartTimerRef = useRef(null)
+  const contextDataTimerRef = useRef(null)
+  const contextScrollRef = useRef(null)
+  const dataAnchorRef = useRef(null)
 
   const mentionItemsCount = 5
+  const contextSummaryFull =
+    '正在为你汇总“知识库团队周报-随心搭”相关数据、项目进展、用户反馈'
+  const contextChartFull = '正在智能生成可视化数据图表...'
+  const contextDataLines = [
+    { text: '本周数据：', type: 'title' },
+    { text: '生产侧：', type: 'section' },
+    { text: '搭建组件数量：5993（+1.94%）', type: 'item' },
+    { text: '发布组件数量：4034（+7.77%）', type: 'item' },
+    { text: '发布组件人数：1005（+2.34%）', type: 'item' },
+    { text: '0-1搭建：991（+22.95%）', type: 'highlight' },
+    { text: '复用：3043（+3.61%）', type: 'item' },
+    { text: '复用模版：1432（+10.15%）', type: 'item' },
+    { text: '复用非模版：1611（-1.59%）', type: 'highlight' },
+    { text: '消费侧：', type: 'section' },
+    { text: '日均活跃：3086（+2.15%）', type: 'item' },
+    { text: '周活跃：8281（+3.24%）', type: 'item' },
+    { text: '组件日均展示次数：34742（+25.21%）', type: 'item' },
+    { text: '组件日均交互次数：189291（+57.66%）', type: 'highlight' },
+    { text: '组件日均展示人数：5587（+5.61%）', type: 'item' },
+    { text: '组件日均交互人数：2927（+5.94%）', type: 'item' },
+    { text: '本周日均触达人次（交互UV和）：5440（历史最高）', type: 'highlight' },
+    { text: '本周日均触达人次（浏览UV和）：16106（历史最高）', type: 'item' },
+  ]
 
   const initialContentHtml = `
-    <h3 style="font-size:16px;font-weight:600;color:#111827;margin:0 0 10px 0;">部门指标</h3>
-    <div style="border:1px solid #EEF0F3;border-radius:12px;overflow:hidden;margin-bottom:16px;background:#FFFFFF;">
-      <div style="display:grid;grid-template-columns:120px 200px 80px 140px 140px 140px 220px 120px;font-size:12px;font-weight:600;color:#6B7280;background:#F7F8FA;">
-        <div style="padding:8px 10px;border-right:1px solid #EEF0F3;">类型</div>
-        <div style="padding:8px 10px;border-right:1px solid #EEF0F3;">指标名称</div>
-        <div style="padding:8px 10px;border-right:1px solid #EEF0F3;">单位</div>
-        <div style="padding:8px 10px;border-right:1px solid #EEF0F3;">26年目标值</div>
-        <div style="padding:8px 10px;border-right:1px solid #EEF0F3;">26年Q1目标值</div>
-        <div style="padding:8px 10px;border-right:1px solid #EEF0F3;">Q4末基线值</div>
-        <div style="padding:8px 10px;border-right:1px solid #EEF0F3;">计算方法</div>
-        <div style="padding:8px 10px;">备注</div>
-      </div>
-      <div style="display:grid;grid-template-columns:120px 200px 80px 140px 140px 140px 220px 120px;font-size:12px;color:#374151;">
-        <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">公司和业务降本</div>
-        <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">业务工时节省</div>
-        <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">人月</div>
-        <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">800人月（+10%）</div>
-        <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">180人月</div>
-        <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">727.3人月</div>
-        <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">被赋能业务原人工时 - 现人工时</div>
-        <div style="padding:8px 10px;border-top:1px solid #EEF0F3;">Q1:72.8; Q2:153.2</div>
-      </div>
-      <div style="display:grid;grid-template-columns:120px 200px 80px 140px 140px 140px 220px 120px;font-size:12px;color:#374151;">
-        <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">月人均交付需求数</div>
-        <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">平台化赋能交付需求数</div>
-        <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">个</div>
-        <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">-</div>
-        <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">-</div>
-        <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">-</div>
-        <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">各项开放能力赋能业务的交付需求数</div>
-        <div style="padding:8px 10px;border-top:1px solid #EEF0F3;">-</div>
-      </div>
-      <div style="display:grid;grid-template-columns:120px 200px 80px 140px 140px 140px 220px 120px;font-size:12px;color:#374151;">
-        <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">-</div>
-        <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">研发工时节省</div>
-        <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">人月</div>
-        <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">209人月（+10%）</div>
-        <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">50人月</div>
-        <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">190人月</div>
-        <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">开发者原研发工时 - 现研发工时</div>
-        <div style="padding:8px 10px;border-top:1px solid #EEF0F3;">-</div>
-      </div>
-    </div>
-
-    <h3 style="font-size:16px;font-weight:600;color:#111827;margin:0 0 10px 0;">团队关键指标</h3>
-    <div style="border:1px solid #EEF0F3;border-radius:12px;overflow:hidden;margin-bottom:16px;background:#FFFFFF;">
-      <div style="display:grid;grid-template-columns:240px 80px 140px 140px 140px 220px;font-size:12px;font-weight:600;color:#6B7280;background:#F7F8FA;">
-        <div style="padding:8px 10px;border-right:1px solid #EEF0F3;">指标名称</div>
-        <div style="padding:8px 10px;border-right:1px solid #EEF0F3;">单位</div>
-        <div style="padding:8px 10px;border-right:1px solid #EEF0F3;">26年目标值</div>
-        <div style="padding:8px 10px;border-right:1px solid #EEF0F3;">26年Q1目标值</div>
-        <div style="padding:8px 10px;border-right:1px solid #EEF0F3;">Q4末基线值</div>
-        <div style="padding:8px 10px;">计算方法</div>
-      </div>
-      <div style="display:grid;grid-template-columns:240px 80px 140px 140px 140px 220px;font-size:12px;color:#374151;">
-        <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">智能体参与读/写/管理的文档占比</div>
-        <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">%</div>
-        <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">10%</div>
-        <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">5.8%</div>
-        <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">4.8%</div>
-        <div style="padding:8px 10px;border-top:1px solid #EEF0F3;">智能体参与读/写/管理的日均文档数 / 活跃的日均文档数</div>
-      </div>
-      <div style="display:grid;grid-template-columns:240px 80px 140px 140px 140px 220px;font-size:12px;color:#374151;">
-        <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">知识库“随心搭”组件日均交互次数</div>
-        <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">次/日</div>
-        <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">-</div>
-        <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">-</div>
-        <div style="padding:8px 10px;border-top:1px solid #EEF0F3;border-right:1px solid #EEF0F3;">-</div>
-        <div style="padding:8px 10px;border-top:1px solid #EEF0F3;">-</div>
-      </div>
-    </div>
-
-    <h3 style="font-size:16px;font-weight:600;color:#111827;margin:0 0 10px 0;">项目进展</h3>
-    <p style="margin:0 0 20px 0;font-size:14px;color:#4B5563;line-height:1.6;">
-      O1：【知识管理】打造人与智能体协同的开放知识库，AI内化实现文档新体验，打通文档上下游断点，赋能工作流提效
+    <h3 style="font-size:18px;font-weight:600;color:#111827;margin:0 0 12px 0;">项目一：随心搭</h3>
+    <p style="margin:0 0 14px 0;color:#374151;line-height:1.7;">
+      知识库“随心搭”优化业务系统API联动和代码质检、拓展沉淀开箱即用组件模板，提升使用频次，释放泛研发生产力。
     </p>
-  <p style="margin:0;">
-    <br /><br /><br /><br /><br />
-    <br /><br /><br /><br /><br />
-    <br /><br /><br /><br /><br />
-    <br /><br /><br /><br /><br />
-  </p>
+
+    <h4 style="font-size:14px;font-weight:600;color:#111827;margin:0 0 8px 0;">能力建设</h4>
+    <p style="margin:0 0 10px 0;color:#4B5563;">PM：@李港；RD：@谢郁 @贾铮</p>
+    <p style="margin:0 0 6px 0;color:#111827;font-weight:600;">1、数据监控</p>
+    <ul style="margin:0 0 10px 18px;color:#4B5563;">
+      <li>本周数据</li>
+      <li style="margin-top:6px;">累计数据</li>
+    </ul>
+    <p style="margin:0 0 6px 0;color:#111827;font-weight:600;">2、本周上线</p>
+    <ul style="margin:0 0 10px 18px;color:#4B5563;">
+      <li>侧边栏适配</li>
+    </ul>
+    <p style="margin:0 0 6px 0;color:#111827;font-weight:600;">3、本周其他进展</p>
+    <ul style="margin:0 0 16px 18px;color:#4B5563;">
+      <li>后端随心搭一体化</li>
+      <li style="margin-top:6px;">随心搭画布产品化</li>
+    </ul>
+
+    <h4 style="font-size:14px;font-weight:600;color:#111827;margin:0 0 8px 0;">业务赋能</h4>
+    <p style="margin:0 0 6px 0;color:#111827;font-weight:600;">1、本周上线</p>
+    <p style="margin:0 0 12px 0;color:#4B5563;">—</p>
+    <p style="margin:0 0 6px 0;color:#111827;font-weight:600;">2、本周其他进展</p>
+    <p style="margin:0 0 18px 0;color:#4B5563;">—</p>
+
+    <h3 style="font-size:18px;font-weight:600;color:#111827;margin:0 0 12px 0;">项目二：内外协同</h3>
+    <p style="margin:0 0 14px 0;color:#374151;line-height:1.7;">
+      知识库“API/SDK”优化精细化操作技能、简化数字员工调用，扩大应用场景，提升智能体参与读/写/管理的文档占比
+    </p>
+
+    <h4 style="font-size:14px;font-weight:600;color:#111827;margin:0 0 8px 0;">能力建设</h4>
+    <p style="margin:0 0 10px 0;color:#4B5563;">PM：@李港；RD：@谢郁 @姚泰南 @侯园梅</p>
+    <p style="margin:0 0 6px 0;color:#111827;font-weight:600;">1、数据监控</p>
+    <ul style="margin:0 0 10px 18px;color:#4B5563;">
+      <li>本周数据</li>
+      <li style="margin-top:6px;">累计数据</li>
+    </ul>
+    <p style="margin:0 0 6px 0;color:#111827;font-weight:600;">2、本周上线</p>
+    <ul style="margin:0 0 10px 18px;color:#4B5563;">
+      <li>侧边栏适配</li>
+    </ul>
+    <p style="margin:0 0 6px 0;color:#111827;font-weight:600;">3、本周其他进展</p>
+    <p style="margin:0 0 16px 0;color:#4B5563;">—</p>
+
+    <h4 style="font-size:14px;font-weight:600;color:#111827;margin:0 0 8px 0;">业务赋能</h4>
+    <p style="margin:0 0 6px 0;color:#111827;font-weight:600;">1、本周上线</p>
+    <p style="margin:0 0 12px 0;color:#4B5563;">—</p>
+    <p style="margin:0 0 6px 0;color:#111827;font-weight:600;">2、本周其他进展</p>
+    <p style="margin:0;color:#4B5563;">—</p>
   `
 
   const getCaretRect = useCallback((range) => {
@@ -261,6 +246,35 @@ export default function MainEditor({ docTitle = '未命名文档' }) {
     [getCaretRect]
   )
 
+  const findDataAnchor = useCallback(() => {
+    const editor = editorRef.current
+    if (!editor) return null
+    const candidates = Array.from(editor.querySelectorAll('li, p, span, div'))
+    const anchor = candidates.find((node) => (node.textContent || '').trim() === '本周数据')
+    if (anchor) dataAnchorRef.current = anchor
+    return anchor || dataAnchorRef.current
+  }, [])
+
+  const updateContextHint = useCallback(
+    (range) => {
+      const editor = editorRef.current
+      if (!editor || !range || !editor.contains(range.startContainer)) {
+        setShowContextHint(false)
+        return
+      }
+      const anchor = findDataAnchor()
+      const caretRect = getCaretRect(range)
+      if (!anchor || !caretRect) {
+        setShowContextHint(false)
+        return
+      }
+      const anchorRect = anchor.getBoundingClientRect()
+      const isNear = Math.abs(caretRect.top - anchorRect.top) < 120
+      setShowContextHint(isNear)
+    },
+    [findDataAnchor, getCaretRect]
+  )
+
   const captureSelection = useCallback(() => {
     const editor = editorRef.current
     if (!editor) return
@@ -269,7 +283,8 @@ export default function MainEditor({ docTitle = '未命名文档' }) {
     const range = selection.getRangeAt(0)
     if (!editor.contains(range.startContainer)) return
     selectionRef.current = range.cloneRange()
-  }, [])
+    updateContextHint(range)
+  }, [updateContextHint])
 
   const selectMentionByIndex = useCallback((index) => {
     const items = [
@@ -528,11 +543,16 @@ export default function MainEditor({ docTitle = '未命名文档' }) {
             border-radius: 6px; background: rgba(99,102,241,0.15); color:#6366F1; font-size:12px; font-weight:600;
             box-shadow: 0 0 0 1px rgba(99,102,241,0.2);
           ">AI</span>
-          <span style="font-size:13px; color:#4B5563; font-weight:700; letter-spacing:0.2px;">本周数据 · 知识库方向周报</span>
-          <span style="font-size:12px; color:#9CA3AF;">${queryText}</span>
+          <span style="font-size:13px; color:#4B5563; font-weight:700; letter-spacing:0.2px;">本周数据 · 随心搭使用频次数据</span>
           <span style="margin-left:auto; font-size:11px; color:#6366F1; background:rgba(99,102,241,0.12); padding:4px 8px; border-radius:999px;">AI 生成</span>
         </div>
 
+        <div style="display:flex; gap:8px; margin-bottom:12px;">
+          <button data-tab="week" style="padding:4px 10px; border-radius:999px; border:1px solid rgba(99,102,241,0.3); background:rgba(99,102,241,0.15); color:#4F46E5; font-size:12px; font-weight:600;">本周</button>
+          <button data-tab="last" style="padding:4px 10px; border-radius:999px; border:1px solid rgba(229,231,235,0.8); background:rgba(255,255,255,0.7); color:#6B7280; font-size:12px; font-weight:600;">上周</button>
+        </div>
+
+        <div data-tab-content="week">
         <div style="display:grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap:10px; margin-bottom:12px; position:relative;">
           <div style="padding:10px 12px; background:rgba(255,255,255,0.95); border-radius:12px; border:1px solid rgba(99,102,241,0.10); box-shadow: 0 8px 18px -14px rgba(99,102,241,0.35);">
             <div style="display:flex; align-items:center; gap:6px; font-size:11px; color:#9CA3AF;">
@@ -644,6 +664,104 @@ export default function MainEditor({ docTitle = '未命名文档' }) {
             </div>
           </div>
         </div>
+        </div>
+
+        <div data-tab-content="last" style="display:none;">
+        <div style="display:grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap:10px; margin-bottom:12px; position:relative;">
+          <div style="padding:10px 12px; background:rgba(255,255,255,0.95); border-radius:12px; border:1px solid rgba(99,102,241,0.10); box-shadow: 0 8px 18px -14px rgba(99,102,241,0.35);">
+            <div style="display:flex; align-items:center; gap:6px; font-size:11px; color:#9CA3AF;">
+              <span style="width:18px;height:18px;border-radius:6px;background:rgba(99,102,241,0.12);display:inline-flex;align-items:center;justify-content:center;">🧩</span>
+              搭建组件数量
+            </div>
+            <div style="font-size:18px; font-weight:600; color:#111827;" data-count="5608">5,608</div>
+            <div style="font-size:11px; color:#10B981;">+1.12%</div>
+          </div>
+          <div style="padding:10px 12px; background:rgba(255,255,255,0.95); border-radius:12px; border:1px solid rgba(99,102,241,0.10); box-shadow: 0 8px 18px -14px rgba(99,102,241,0.35);">
+            <div style="display:flex; align-items:center; gap:6px; font-size:11px; color:#9CA3AF;">
+              <span style="width:18px;height:18px;border-radius:6px;background:rgba(34,197,94,0.12);display:inline-flex;align-items:center;justify-content:center;">🚀</span>
+              发布组件数量
+            </div>
+            <div style="font-size:18px; font-weight:600; color:#111827;" data-count="3761">3,761</div>
+            <div style="font-size:11px; color:#10B981;">+5.41%</div>
+          </div>
+          <div style="padding:10px 12px; background:rgba(255,255,255,0.95); border-radius:12px; border:1px solid rgba(99,102,241,0.10); box-shadow: 0 8px 18px -14px rgba(99,102,241,0.35);">
+            <div style="display:flex; align-items:center; gap:6px; font-size:11px; color:#9CA3AF;">
+              <span style="width:18px;height:18px;border-radius:6px;background:rgba(56,189,248,0.12);display:inline-flex;align-items:center;justify-content:center;">📈</span>
+              日均活跃
+            </div>
+            <div style="font-size:18px; font-weight:600; color:#111827;" data-count="2950">2,950</div>
+            <div style="font-size:11px; color:#10B981;">+1.76%</div>
+          </div>
+          <div style="padding:10px 12px; background:rgba(255,255,255,0.95); border-radius:12px; border:1px solid rgba(99,102,241,0.10); box-shadow: 0 8px 18px -14px rgba(99,102,241,0.35);">
+            <div style="display:flex; align-items:center; gap:6px; font-size:11px; color:#9CA3AF;">
+              <span style="width:18px;height:18px;border-radius:6px;background:rgba(168,85,247,0.12);display:inline-flex;align-items:center;justify-content:center;">📅</span>
+              周活跃
+            </div>
+            <div style="font-size:18px; font-weight:600; color:#111827;" data-count="7990">7,990</div>
+            <div style="font-size:11px; color:#10B981;">+2.58%</div>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-bottom:12px;">
+          <div style="padding:12px; background:rgba(255,255,255,0.95); border-radius:12px; border:1px solid rgba(99,102,241,0.10); box-shadow: 0 10px 20px -16px rgba(99,102,241,0.35);">
+            <div style="font-size:13px; color:#4B5563; font-weight:700; margin-bottom:8px;">生产侧</div>
+            <div style="display:grid; grid-template-columns: 1fr; gap:8px;">
+              <div style="display:flex; align-items:center; justify-content:space-between; font-size:13px; font-weight:600; color:#374151;">
+                <span>发布组件人数</span>
+                <span style="color:#111827;" data-count="968">968</span>
+              </div>
+              <div style="display:flex; align-items:center; justify-content:space-between; font-size:13px; font-weight:600; color:#374151;">
+                <span>0-1搭建</span>
+                <span style="color:#111827;" data-count="915">915</span>
+              </div>
+              <div style="display:flex; align-items:center; justify-content:space-between; font-size:13px; font-weight:600; color:#374151;">
+                <span>复用模版</span>
+                <span style="color:#111827;" data-count="1369">1,369</span>
+              </div>
+              <div style="display:flex; align-items:center; justify-content:space-between; font-size:13px; font-weight:600; color:#374151;">
+                <span>复用非模版</span>
+                <span style="color:#111827;" data-count="1528">1,528</span>
+              </div>
+              <div style="padding:8px; border:1px solid #EEF0F3; border-radius:8px; background:#FFFFFF;">
+                <div style="font-size:11px; color:#9CA3AF;">复用占比</div>
+                <div style="font-size:14px; font-weight:600; color:#111827;">48.6%</div>
+                <div style="height:6px; margin-top:6px; background:#EEF2FF; border-radius:999px; overflow:hidden;">
+                  <div style="width:49%; height:100%; background:linear-gradient(90deg,#22C55E,#86EFAC);"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="padding:12px; background:rgba(255,255,255,0.95); border-radius:12px; border:1px solid rgba(99,102,241,0.10); box-shadow: 0 10px 20px -16px rgba(99,102,241,0.35);">
+            <div style="font-size:13px; color:#4B5563; font-weight:700; margin-bottom:8px;">消费侧</div>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px;">
+              <div style="padding:8px; border:1px solid #EEF0F3; border-radius:8px; background:#FFFFFF;">
+                <div style="font-size:11px; color:#9CA3AF;">展示次数</div>
+                <div style="font-size:14px; font-weight:600; color:#111827;" data-count="32960">32,960</div>
+                <div style="font-size:10px; color:#10B981;">+18.8%</div>
+              </div>
+              <div style="padding:8px; border:1px solid #EEF0F3; border-radius:8px; background:#FFFFFF;">
+                <div style="font-size:11px; color:#9CA3AF;">交互次数</div>
+                <div style="font-size:14px; font-weight:600; color:#111827;" data-count="167420">167,420</div>
+                <div style="font-size:10px; color:#10B981;">+42.3%</div>
+              </div>
+              <div style="padding:8px; border:1px solid #EEF0F3; border-radius:8px; background:#FFFFFF;">
+                <div style="font-size:11px; color:#9CA3AF;">展示人数</div>
+                <div style="font-size:14px; font-weight:600; color:#111827;" data-count="5420">5,420</div>
+                <div style="font-size:10px; color:#10B981;">+4.1%</div>
+              </div>
+              <div style="padding:8px; border:1px solid #EEF0F3; border-radius:8px; background:#FFFFFF;">
+                <div style="font-size:11px; color:#9CA3AF;">交互人数</div>
+                <div style="font-size:14px; font-weight:600; color:#111827;" data-count="2788">2,788</div>
+                <div style="font-size:10px; color:#10B981;">+4.6%</div>
+              </div>
+            </div>
+            <div style="margin-top:10px; padding:8px; border-radius:8px; background:linear-gradient(90deg, rgba(99,102,241,0.12), rgba(56,189,248,0.10)); font-size:11px; color:#4B5563;">
+              触达人次（交互UV和）：<strong>5,020</strong> · 触达人次（浏览UV和）：<strong>15,220</strong>
+            </div>
+          </div>
+        </div>
+        </div>
       </div>
     `
 
@@ -670,6 +788,26 @@ export default function MainEditor({ docTitle = '未命名文档' }) {
       })
     }
 
+    const tabButtons = Array.from(dashboardNode.querySelectorAll('[data-tab]'))
+    const tabContents = Array.from(dashboardNode.querySelectorAll('[data-tab-content]'))
+    const setTab = (name) => {
+      tabContents.forEach((content) => {
+        content.style.display = content.getAttribute('data-tab-content') === name ? 'block' : 'none'
+      })
+      tabButtons.forEach((btn) => {
+        const active = btn.getAttribute('data-tab') === name
+        btn.style.background = active ? 'rgba(99,102,241,0.15)' : 'rgba(255,255,255,0.7)'
+        btn.style.color = active ? '#4F46E5' : '#6B7280'
+        btn.style.borderColor = active ? 'rgba(99,102,241,0.3)' : 'rgba(229,231,235,0.8)'
+      })
+      const activeContent = dashboardNode.querySelector(`[data-tab-content="${name}"]`)
+      if (activeContent) animateNumbers(activeContent)
+    }
+    tabButtons.forEach((btn) => {
+      btn.addEventListener('click', () => setTab(btn.getAttribute('data-tab')))
+    })
+    setTab('week')
+
     const spacer = document.createElement('p')
     spacer.innerHTML = '<br />'
 
@@ -693,6 +831,60 @@ export default function MainEditor({ docTitle = '未命名文档' }) {
     setTimeout(() => setLastInsertHint(''), 1500)
   }
 
+  const insertDashboardAfterAnchor = (queryText) => {
+    const editor = editorRef.current
+    if (!editor) {
+      insertDashboardInline(queryText)
+      return
+    }
+    const anchor = findDataAnchor()
+    if (!anchor) {
+      insertDashboardInline(queryText)
+      return
+    }
+    const list = anchor.closest('ul')
+    if (list && list.parentNode) {
+      const newList = document.createElement('ul')
+      const listStyle = list.getAttribute('style')
+      if (listStyle) newList.setAttribute('style', listStyle)
+      while (anchor.nextSibling) {
+        newList.appendChild(anchor.nextSibling)
+      }
+      if (newList.childNodes.length > 0) {
+        list.parentNode.insertBefore(newList, list.nextSibling)
+      }
+      const range = document.createRange()
+      range.setStartAfter(list)
+      range.collapse(true)
+      const sel = window.getSelection()
+      sel?.removeAllRanges()
+      sel?.addRange(range)
+      selectionRef.current = range
+    }
+    insertDashboardInline(queryText)
+  }
+
+  const handleContextInsert = () => {
+    insertDashboardAfterAnchor('随心搭')
+    setContextPanelOpen(false)
+  }
+
+  const handleContextRegenerate = () => {
+    pendingDashboardRef.current = '随心搭'
+    startGenerationSequence()
+  }
+
+  const handleContextLocate = () => {
+    const anchor = findDataAnchor()
+    if (anchor?.scrollIntoView) {
+      anchor.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    }
+  }
+
+  const handleContextEdit = () => {
+    editorRef.current?.focus()
+  }
+
   useEffect(() => {
     const onSelectionChange = () => captureSelection()
     document.addEventListener('selectionchange', onSelectionChange)
@@ -706,6 +898,130 @@ export default function MainEditor({ docTitle = '未命名文档' }) {
       clearStatusLine()
     }
   }, [])
+
+  useEffect(() => {
+    if (!contextPanelOpen) return
+    setContextStep(0)
+    setContextDone(false)
+    setContextSummaryText('')
+    setContextChartText('')
+    setContextChartReady(false)
+    setContextDataLineCount(0)
+    if (contextSummaryTimerRef.current) {
+      clearInterval(contextSummaryTimerRef.current)
+      contextSummaryTimerRef.current = null
+    }
+    if (contextChartTimerRef.current) {
+      clearInterval(contextChartTimerRef.current)
+      contextChartTimerRef.current = null
+    }
+    if (contextDataTimerRef.current) {
+      clearInterval(contextDataTimerRef.current)
+      contextDataTimerRef.current = null
+    }
+    contextTimerRef.current.forEach((t) => clearTimeout(t))
+    contextTimerRef.current = []
+    const t1 = setTimeout(() => setContextStep(1), 1600)
+    const t2 = setTimeout(() => setContextStep(2), 3800)
+    const t3 = setTimeout(() => setContextChartReady(true), 8800)
+    const t4 = setTimeout(() => setContextDone(true), 9500)
+    contextTimerRef.current = [t1, t2, t3, t4]
+    return () => {
+      contextTimerRef.current.forEach((t) => clearTimeout(t))
+      contextTimerRef.current = []
+      if (contextSummaryTimerRef.current) {
+        clearInterval(contextSummaryTimerRef.current)
+        contextSummaryTimerRef.current = null
+      }
+      if (contextChartTimerRef.current) {
+        clearInterval(contextChartTimerRef.current)
+        contextChartTimerRef.current = null
+      }
+      if (contextDataTimerRef.current) {
+        clearInterval(contextDataTimerRef.current)
+        contextDataTimerRef.current = null
+      }
+    }
+  }, [contextPanelOpen])
+
+  useEffect(() => {
+    if (!contextPanelOpen || contextSummaryTimerRef.current) return
+    let i = 0
+    contextSummaryTimerRef.current = setInterval(() => {
+      i += 1
+      setContextSummaryText(contextSummaryFull.slice(0, i))
+      if (i >= contextSummaryFull.length) {
+        clearInterval(contextSummaryTimerRef.current)
+        contextSummaryTimerRef.current = null
+      }
+    }, 30)
+    return () => {
+      if (contextSummaryTimerRef.current) {
+        clearInterval(contextSummaryTimerRef.current)
+        contextSummaryTimerRef.current = null
+      }
+    }
+  }, [contextPanelOpen, contextSummaryFull])
+
+  useEffect(() => {
+    if (
+      !contextPanelOpen ||
+      contextStep < 2 ||
+      contextDataLineCount < contextDataLines.length ||
+      contextChartTimerRef.current
+    )
+      return
+    let i = 0
+    contextChartTimerRef.current = setInterval(() => {
+      i += 1
+      setContextChartText(contextChartFull.slice(0, i))
+      if (i >= contextChartFull.length) {
+        clearInterval(contextChartTimerRef.current)
+        contextChartTimerRef.current = null
+      }
+    }, 32)
+    return () => {
+      if (contextChartTimerRef.current) {
+        clearInterval(contextChartTimerRef.current)
+        contextChartTimerRef.current = null
+      }
+    }
+  }, [contextPanelOpen, contextStep, contextChartFull, contextDataLineCount, contextDataLines.length])
+
+  useEffect(() => {
+    if (
+      !contextPanelOpen ||
+      contextStep < 1 ||
+      contextSummaryText.length < contextSummaryFull.length ||
+      contextDataTimerRef.current
+    )
+      return
+    contextDataTimerRef.current = setInterval(() => {
+      setContextDataLineCount((prev) => {
+        const next = Math.min(prev + 1, contextDataLines.length)
+        if (next >= contextDataLines.length && contextDataTimerRef.current) {
+          clearInterval(contextDataTimerRef.current)
+          contextDataTimerRef.current = null
+        }
+        return next
+      })
+    }, 90)
+    return () => {
+      if (contextDataTimerRef.current) {
+        clearInterval(contextDataTimerRef.current)
+        contextDataTimerRef.current = null
+      }
+    }
+  }, [contextPanelOpen, contextStep, contextSummaryText.length, contextSummaryFull.length, contextDataLines.length])
+
+  useEffect(() => {
+    if (!contextPanelOpen) return
+    const container = contextScrollRef.current
+    if (!container) return
+    requestAnimationFrame(() => {
+      container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' })
+    })
+  }, [contextStep, contextDataLineCount, contextChartReady, contextDone, contextPanelOpen])
 
   useEffect(() => {
     const editor = editorRef.current
@@ -885,6 +1201,175 @@ export default function MainEditor({ docTitle = '未命名文档' }) {
           </div>
         </div>
       </div>
+
+      <AnimatePresence>
+        {showContextHint && !contextPanelOpen && (
+          <motion.div
+            key="context-hint"
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            className="fixed top-6 right-8 z-40"
+          >
+            <button
+              onClick={() => setContextPanelOpen(true)}
+              className="hint-glow"
+            >
+              <div className="hint-glow-inner flex items-center gap-3 px-4 py-2 rounded-full bg-white/95 backdrop-blur border border-white/90 shadow-[0_12px_30px_-18px_rgba(17,24,39,0.5)] text-sm text-gray-700">
+                <div className="w-6 h-6 rounded-full overflow-hidden ring-1 ring-white/70">
+                  <img src={sugarAvatar} alt="Sugar 智能体" className="w-full h-full object-cover" />
+                </div>
+                <span className="text-accent-purple font-semibold">Sugar 智能体</span>
+                <span>正在为你检测随心搭数据</span>
+                <span className="text-accent-purple font-semibold">查看</span>
+              </div>
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {contextPanelOpen && (
+          <motion.aside
+            key="context-panel"
+            initial={{ x: 360, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: 360, opacity: 0 }}
+            transition={{ type: 'spring', stiffness: 240, damping: 26 }}
+            className="fixed right-0 top-0 h-screen w-[360px] z-40 bg-white/35 backdrop-blur-[30px] border-l border-white/60 shadow-[0_30px_70px_-30px_rgba(15,23,42,0.4)] overflow-hidden"
+          >
+            <div className="absolute inset-0 pointer-events-none">
+              <div className="absolute -inset-[35%] panel-flow bg-[radial-gradient(40%_40%_at_15%_20%,rgba(99,102,241,0.25),transparent_60%),radial-gradient(35%_35%_at_80%_10%,rgba(236,72,153,0.22),transparent_60%),radial-gradient(45%_45%_at_70%_80%,rgba(56,189,248,0.2),transparent_65%)]" />
+              <div className="absolute inset-0 bg-gradient-to-b from-white/55 via-white/35 to-white/25" />
+            </div>
+            <div ref={contextScrollRef} className="h-full flex flex-col overflow-y-auto">
+              <div className="sticky top-0 z-10 flex items-center justify-between px-5 pt-5 pb-3 bg-white/60 backdrop-blur-[28px] border-b border-white/60">
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-semibold text-gray-900">Sugar 智能体</span>
+                  <span className="text-[11px] text-gray-500">环境感知</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={() => setContextPanelOpen(false)}
+                    className="text-xs text-gray-500 hover:text-gray-700 transition-colors"
+                  >
+                    关闭
+                  </button>
+                </div>
+              </div>
+
+              <div className="relative px-5 pb-8 pt-4 flex flex-col gap-4">
+
+              <div className="text-sm text-gray-600 leading-relaxed select-none">
+                {contextSummaryText}
+              </div>
+
+              {contextSummaryText.length >= contextSummaryFull.length && contextStep >= 1 && (
+                <div className="rounded-2xl border border-white/60 bg-white/80 p-4 shadow-[0_14px_30px_-22px_rgba(15,23,42,0.4)]">
+                  <div className="text-sm font-semibold text-gray-900">
+                    Sugar 已汇总“随心搭”本周数据
+                  </div>
+                  <div className="text-xs text-gray-500 mt-1">包含生产侧、消费侧搭建数量</div>
+                  <div className="mt-3 text-sm leading-relaxed select-none">
+                    {contextDataLines.slice(0, contextDataLineCount).map((line, idx) => {
+                      const isItem = line.type === 'item' || line.type === 'highlight'
+                      const className =
+                        line.type === 'title'
+                          ? 'font-semibold text-gray-900 mb-2'
+                          : line.type === 'section'
+                            ? 'font-semibold text-gray-900 mt-3 mb-1'
+                            : line.type === 'highlight'
+                              ? 'text-emerald-600 font-semibold'
+                              : 'text-gray-700'
+                      return (
+                        <div key={`${line.text}-${idx}`} className={`${className} ${isItem ? 'pl-3' : ''}`}>
+                          {isItem ? '• ' : ''}
+                          {line.text}
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {contextStep >= 2 && contextDataLineCount >= contextDataLines.length && (
+                <div className="rounded-2xl border border-white/60 bg-white/70 p-4 shadow-[0_12px_26px_-22px_rgba(15,23,42,0.35)]">
+                  <div className="text-sm text-gray-700 select-none">{contextChartText}</div>
+                  {!contextChartReady && (
+                    <div className="mt-4 space-y-3">
+                      <div className="h-4 w-2/3 rounded-full bg-gray-200/70 animate-pulse" />
+                      <div className="h-28 w-full rounded-2xl bg-gray-200/70 animate-pulse" />
+                      <div className="grid grid-cols-3 gap-2">
+                        <div className="h-12 rounded-xl bg-gray-200/70 animate-pulse" />
+                        <div className="h-12 rounded-xl bg-gray-200/70 animate-pulse" />
+                        <div className="h-12 rounded-xl bg-gray-200/70 animate-pulse" />
+                      </div>
+                    </div>
+                  )}
+                  {contextChartReady && (
+                    <div className="mt-4 space-y-3">
+                      <div className="text-xs text-gray-500">图表生成完成</div>
+                      <div className="rounded-xl border border-gray-200/70 bg-gradient-to-br from-white to-gray-50 p-3 shadow-[0_10px_22px_-18px_rgba(15,23,42,0.4)]">
+                        <div className="flex items-center justify-between text-[11px] text-gray-500">
+                          <span>生产侧 / 消费侧预览</span>
+                          <span className="text-emerald-500">实时</span>
+                        </div>
+                        <div className="mt-3 grid grid-cols-3 gap-2">
+                          <div className="h-16 rounded-lg bg-gradient-to-b from-indigo-100 to-indigo-200/60" />
+                          <div className="h-16 rounded-lg bg-gradient-to-b from-sky-100 to-sky-200/60" />
+                          <div className="h-16 rounded-lg bg-gradient-to-b from-emerald-100 to-emerald-200/60" />
+                        </div>
+                        <div className="mt-3 h-2 rounded-full bg-gray-200/70 overflow-hidden">
+                          <div className="h-full w-[62%] bg-accent-purple/60" />
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {contextDone && (
+                <div className="rounded-2xl border border-white/60 bg-white/80 p-4 shadow-[0_14px_30px_-22px_rgba(15,23,42,0.4)]">
+                  <div className="text-sm text-gray-700">iCafe 正在总结当前随心搭相关需求进展...</div>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    <button
+                      onClick={handleContextInsert}
+                      className="px-3 py-1.5 text-xs rounded-full bg-accent-purple text-white hover:bg-accent-purple-dark transition-colors"
+                    >
+                      插入
+                    </button>
+                    <button
+                      onClick={handleContextEdit}
+                      className="px-3 py-1.5 text-xs rounded-full border border-gray-200 text-gray-700 hover:bg-gray-50 transition-colors"
+                    >
+                      编辑
+                    </button>
+                    <button
+                      onClick={handleContextLocate}
+                      className="px-3 py-1.5 text-xs rounded-full border border-gray-200 text-gray-700 hover:bg-gray-50 transition-colors"
+                    >
+                      定位
+                    </button>
+                    <button
+                      onClick={handleContextRegenerate}
+                      className="px-3 py-1.5 text-xs rounded-full border border-gray-200 text-gray-700 hover:bg-gray-50 transition-colors"
+                    >
+                      重新生成
+                    </button>
+                    <button
+                      onClick={() => setContextPanelOpen(false)}
+                      className="px-3 py-1.5 text-xs rounded-full border border-gray-200 text-gray-500 hover:bg-gray-50 transition-colors"
+                    >
+                      丢弃
+                    </button>
+                  </div>
+                </div>
+              )}
+              </div>
+            </div>
+          </motion.aside>
+        )}
+      </AnimatePresence>
     </main>
   )
 }

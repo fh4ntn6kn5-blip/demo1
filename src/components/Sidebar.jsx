@@ -35,7 +35,7 @@ const treeData = [
     type: 'folder',
     expanded: true,
     children: [
-      { id: '4-1', name: '知识库方向周报.md', type: 'file' },
+      { id: '4-1', name: '模拟场景-知识库团队周报.md', type: 'file' },
       { id: '4-2', name: '指标追踪.md', type: 'file' },
     ],
   },
@@ -49,7 +49,7 @@ function TreeNode({ node, level = 0, onSelect, selectedName }) {
     return (
       <button
         onClick={() => onSelect?.(node)}
-        className={`w-full flex items-center gap-2 py-1.5 text-left text-sm rounded-lg transition-colors ${
+        className={`w-full min-w-0 box-border pr-2 flex items-center gap-2 py-1.5 text-left text-sm rounded-lg transition-colors ${
           isSelected ? 'bg-accent-purple/10 text-accent-purple' : 'text-gray-700 hover:bg-white/70'
         }`}
         style={{ paddingLeft: `${level * 16}px` }}
@@ -61,7 +61,7 @@ function TreeNode({ node, level = 0, onSelect, selectedName }) {
         >
           <FileText className={`w-3.5 h-3.5 ${isSelected ? 'text-accent-purple' : 'text-gray-500'}`} />
         </div>
-        <span className="truncate">{node.name}</span>
+        <span className="truncate flex-1 min-w-0">{node.name}</span>
       </button>
     )
   }
@@ -70,7 +70,7 @@ function TreeNode({ node, level = 0, onSelect, selectedName }) {
     <div className="select-none">
       <button
         onClick={() => setExpanded(!expanded)}
-        className="w-full flex items-center gap-2 py-1.5 text-left text-sm text-gray-800 hover:bg-white/70 rounded-lg transition-colors"
+        className="w-full min-w-0 box-border pr-2 flex items-center gap-2 py-1.5 text-left text-sm text-gray-800 hover:bg-white/70 rounded-lg transition-colors"
         style={{ paddingLeft: `${level * 16}px` }}
       >
         <div className="w-6 h-6 rounded-md bg-gradient-to-br from-indigo-100/80 to-blue-200/40 border border-indigo-100/70 shadow-[0_6px_14px_-12px_rgba(0,0,0,0.2)] flex items-center justify-center">
@@ -83,7 +83,7 @@ function TreeNode({ node, level = 0, onSelect, selectedName }) {
         <ChevronRight
           className={`w-3.5 h-3.5 text-gray-400 flex-shrink-0 transition-transform ${expanded ? 'rotate-90' : ''}`}
         />
-        <span className="truncate">{node.name}</span>
+        <span className="truncate flex-1 min-w-0">{node.name}</span>
       </button>
       {expanded && node.children && (
         <div className="mt-0.5">
