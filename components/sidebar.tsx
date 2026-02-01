@@ -1,65 +1,85 @@
-import { useState } from 'react'
-import { ChevronRight, Folder, FolderOpen, FileText, Search } from 'lucide-react'
+"use client"
+
+import { useState } from "react"
+import { ChevronRight, Folder, FolderOpen, FileText, Search } from "lucide-react"
 
 const treeData = [
   {
-    id: '1',
-    name: '产品文档',
-    type: 'folder',
+    id: "1",
+    name: "产品文档",
+    type: "folder",
     expanded: true,
     children: [
-      { id: '1-1', name: '需求文档.md', type: 'file' },
-      { id: '1-2', name: 'PRD v2.0.md', type: 'file' },
+      { id: "1-1", name: "需求文档.md", type: "file" },
+      { id: "1-2", name: "PRD v2.0.md", type: "file" },
     ],
   },
   {
-    id: '2',
-    name: '技术方案',
-    type: 'folder',
+    id: "2",
+    name: "技术方案",
+    type: "folder",
     expanded: true,
     children: [
-      { id: '2-1', name: '架构设计.md', type: 'file' },
-      { id: '2-2', name: 'API 文档.md', type: 'file' },
+      { id: "2-1", name: "架构设计.md", type: "file" },
+      { id: "2-2", name: "API 文档.md", type: "file" },
     ],
   },
   {
-    id: '3',
-    name: '会议纪要',
-    type: 'folder',
+    id: "3",
+    name: "会议纪要",
+    type: "folder",
     expanded: true,
-    children: [{ id: '3-1', name: '2024 Q1 规划.md', type: 'file' }],
+    children: [{ id: "3-1", name: "2024 Q1 规划.md", type: "file" }],
   },
   {
-    id: '4',
-    name: '数据看板',
-    type: 'folder',
+    id: "4",
+    name: "数据看板",
+    type: "folder",
     expanded: true,
     children: [
-      { id: '4-1', name: '模拟场景-知识库团队周报.md', type: 'file' },
-      { id: '4-2', name: '指标追踪.md', type: 'file' },
+      { id: "4-1", name: "模拟场景-知识库团队周报.md", type: "file" },
+      { id: "4-2", name: "指标追踪.md", type: "file" },
     ],
   },
 ]
 
-function TreeNode({ node, level = 0, onSelect, selectedName }) {
+interface TreeNodeItem {
+  id: string
+  name: string
+  type: "folder" | "file"
+  expanded?: boolean
+  children?: TreeNodeItem[]
+}
+
+function TreeNode({
+  node,
+  level = 0,
+  onSelect,
+  selectedName,
+}: {
+  node: TreeNodeItem
+  level?: number
+  onSelect?: (node: TreeNodeItem) => void
+  selectedName?: string | null
+}) {
   const [expanded, setExpanded] = useState(node.expanded ?? false)
 
-  if (node.type === 'file') {
+  if (node.type === "file") {
     const isSelected = node.name === selectedName
     return (
       <button
         onClick={() => onSelect?.(node)}
         className={`w-full min-w-0 box-border pr-2 flex items-center gap-2 py-1.5 text-left text-sm rounded-lg transition-colors ${
-          isSelected ? 'bg-accent-purple/10 text-accent-purple' : 'text-gray-700 hover:bg-white/70'
+          isSelected ? "bg-indigo-500/10 text-indigo-500" : "text-gray-700 hover:bg-white/70"
         }`}
         style={{ paddingLeft: `${level * 16}px` }}
       >
         <div
           className={`w-6 h-6 rounded-md border shadow-[0_6px_14px_-12px_rgba(0,0,0,0.18)] flex items-center justify-center ${
-            isSelected ? 'bg-accent-purple/10 border-accent-purple/20' : 'bg-white/80 border-white/70'
+            isSelected ? "bg-indigo-500/10 border-indigo-500/20" : "bg-white/80 border-white/70"
           }`}
         >
-          <FileText className={`w-3.5 h-3.5 ${isSelected ? 'text-accent-purple' : 'text-gray-500'}`} />
+          <FileText className={`w-3.5 h-3.5 ${isSelected ? "text-indigo-500" : "text-gray-500"}`} />
         </div>
         <span className="truncate flex-1 min-w-0">{node.name}</span>
       </button>
@@ -81,20 +101,14 @@ function TreeNode({ node, level = 0, onSelect, selectedName }) {
           )}
         </div>
         <ChevronRight
-          className={`w-3.5 h-3.5 text-gray-400 flex-shrink-0 transition-transform ${expanded ? 'rotate-90' : ''}`}
+          className={`w-3.5 h-3.5 text-gray-400 flex-shrink-0 transition-transform ${expanded ? "rotate-90" : ""}`}
         />
         <span className="truncate flex-1 min-w-0">{node.name}</span>
       </button>
       {expanded && node.children && (
         <div className="mt-0.5">
           {node.children.map((child) => (
-            <TreeNode
-              key={child.id}
-              node={child}
-              level={level + 1}
-              onSelect={onSelect}
-              selectedName={selectedName}
-            />
+            <TreeNode key={child.id} node={child} level={level + 1} onSelect={onSelect} selectedName={selectedName} />
           ))}
         </div>
       )}
@@ -102,7 +116,13 @@ function TreeNode({ node, level = 0, onSelect, selectedName }) {
   )
 }
 
-export default function Sidebar({ onSelectDoc, selectedName }) {
+export default function Sidebar({
+  onSelectDoc,
+  selectedName,
+}: {
+  onSelectDoc?: (doc: TreeNodeItem) => void
+  selectedName?: string | null
+}) {
   return (
     <aside className="w-[200px] h-screen shrink-0 bg-transparent">
       <div className="h-full overflow-y-auto py-5 px-4">
@@ -126,7 +146,7 @@ export default function Sidebar({ onSelectDoc, selectedName }) {
             {treeData.map((node) => (
               <TreeNode
                 key={node.id}
-                node={node}
+                node={node as TreeNodeItem}
                 onSelect={onSelectDoc}
                 selectedName={selectedName}
               />
