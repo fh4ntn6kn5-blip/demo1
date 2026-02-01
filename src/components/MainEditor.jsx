@@ -274,7 +274,32 @@ export default function MainEditor({ docTitle = '未命名文档' }) {
       // 只在光标位于"本周数据"所在行或其下一行时触发（约50px范围）
       const diff = caretRect.top - anchorRect.top
       const isNear = diff >= -10 && diff <= 50
-      setShowContextHint(isNear)
+      
+      // 检查当前行是否输入了2个字以上
+      let currentLineText = ''
+      let node = range.startContainer
+      // 找到最近的块级元素（li, p, div等）
+      while (node && node !== editor) {
+        if (node.nodeType === 1 && ['LI', 'P', 'DIV'].includes(node.tagName)) {
+          currentLineText = (node.textContent || '').trim()
+          break
+        }
+        node = node.parentNode
+      }
+      // 如果没找到块级元素，使用当前文本节点内容
+      if (!currentLineText && range.startContainer.nodeType === 3) {
+        currentLineText = (range.startContainer.textContent || '').trim()
+      }
+      
+      const hasEnoughInput = currentLineText.length >= 5
+      // 一旦显示后，只要光标还在附近就保持显示，不会因字数减少而消失
+      if (isNear && hasEnoughInput) {
+        setShowContextHint(true)
+      } else if (!isNear) {
+        // 只有光标离开该区域才隐藏
+        setShowContextHint(false)
+      }
+      // 字数减少但光标仍在附近时，保持当前状态（不变）
     },
     [findDataAnchor, getCaretRect]
   )
@@ -1278,8 +1303,7 @@ export default function MainEditor({ docTitle = '未命名文档' }) {
                       transition={{ duration: 0.25, ease: 'easeOut' }}
                       className="flex items-center gap-3 overflow-hidden whitespace-nowrap text-sm text-gray-700"
                     >
-                      <span className="text-accent-purple font-semibold">Sugar 智能体</span>
-                      <span>正在为你检测随心搭数据</span>
+                      <span className="text-gray-700">Sugar已为你总结本周"随心搭"相关数据</span>
                       <span className="text-accent-purple font-semibold">查看</span>
                     </motion.div>
                   )}
