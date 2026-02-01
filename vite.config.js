@@ -3,4 +3,13 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'lucide-react', 'framer-motion'],
+    force: false,
+  },
+  server: {
+    watch: {
+      usePolling: true,
+    },
+  },
 })
