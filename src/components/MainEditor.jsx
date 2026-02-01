@@ -1,12 +1,13 @@
 import { useState, useRef, useCallback, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Send } from 'lucide-react'
+import { Send, Plus, Sparkles, ChevronDown, Zap } from 'lucide-react'
 import MentionPopover from './MentionPopover'
 
 const sugarAvatar = new URL(
   '../../img/infoflow 2026-01-31 17-57-18.png',
   import.meta.url
 ).href
+const sugarOrb = new URL('../../img/downloaded-file.mp4', import.meta.url).href
 
 const INITIAL_CONTENT_HTML = `
   <h3 style="font-size:18px;font-weight:600;color:#111827;margin:0 0 12px 0;">项目一：随心搭</h3>
@@ -85,6 +86,7 @@ export default function MainEditor({ docTitle = '未命名文档' }) {
   const [contextSummaryText, setContextSummaryText] = useState('')
   const [contextChartText, setContextChartText] = useState('')
   const [contextDataLineCount, setContextDataLineCount] = useState(0)
+  const [isOrbHover, setIsOrbHover] = useState(false)
 
   const editorRef = useRef(null)
   const inputRef = useRef(null)
@@ -103,7 +105,7 @@ export default function MainEditor({ docTitle = '未命名文档' }) {
 
   const mentionItemsCount = 5
   const contextSummaryFull =
-    '正在为你汇总“知识库团队周报-随心搭”相关数据、项目进展、用户反馈'
+    '已检测到你在编辑"随心搭""数据监控"，已为你汇总"知识库团队周报-随心搭"相关数据、项目进展、用户反馈。'
   const contextChartFull = '正在智能生成可视化数据图表...'
   const contextDataLines = [
     { text: '本周数据：', type: 'title' },
@@ -269,7 +271,9 @@ export default function MainEditor({ docTitle = '未命名文档' }) {
         return
       }
       const anchorRect = anchor.getBoundingClientRect()
-      const isNear = Math.abs(caretRect.top - anchorRect.top) < 120
+      // 只在光标位于"本周数据"所在行或其下一行时触发（约50px范围）
+      const diff = caretRect.top - anchorRect.top
+      const isNear = diff >= -10 && diff <= 50
       setShowContextHint(isNear)
     },
     [findDataAnchor, getCaretRect]
@@ -1203,7 +1207,7 @@ export default function MainEditor({ docTitle = '未命名文档' }) {
       </div>
 
       <AnimatePresence>
-        {showContextHint && !contextPanelOpen && (
+        {!contextPanelOpen && (
           <motion.div
             key="context-hint"
             initial={{ opacity: 0, y: -6 }}
@@ -1211,19 +1215,93 @@ export default function MainEditor({ docTitle = '未命名文档' }) {
             exit={{ opacity: 0, y: -6 }}
             className="fixed top-6 right-8 z-40"
           >
+            {/* 单一按钮容器，球体共用 */}
             <button
               onClick={() => setContextPanelOpen(true)}
-              className="hint-glow"
+              onMouseEnter={() => setIsOrbHover(true)}
+              onMouseLeave={() => setIsOrbHover(false)}
+              className={`relative flex items-center rounded-full transition-all duration-300 ease-out ${
+                showContextHint
+                  ? 'hint-glow'
+                  : ''
+              }`}
             >
-              <div className="hint-glow-inner flex items-center gap-3 px-4 py-2 rounded-full bg-white/95 backdrop-blur border border-white/90 shadow-[0_12px_30px_-18px_rgba(17,24,39,0.5)] text-sm text-gray-700">
-                <div className="w-6 h-6 rounded-full overflow-hidden ring-1 ring-white/70">
-                  <img src={sugarAvatar} alt="Sugar 智能体" className="w-full h-full object-cover" />
-                </div>
-                <span className="text-accent-purple font-semibold">Sugar 智能体</span>
-                <span>正在为你检测随心搭数据</span>
-                <span className="text-accent-purple font-semibold">查看</span>
-              </div>
+              {/* 背景层：展开时显示 */}
+              <motion.div
+                initial={false}
+                animate={{
+                  width: showContextHint ? 'auto' : 36,
+                  paddingLeft: showContextHint ? 16 : 0,
+                  paddingRight: showContextHint ? 16 : 0,
+                  paddingTop: showContextHint ? 8 : 0,
+                  paddingBottom: showContextHint ? 8 : 0,
+                }}
+                transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
+                className={`flex items-center gap-3 rounded-full ${
+                  showContextHint
+                    ? 'hint-glow-inner bg-white/95 backdrop-blur border border-white/90 shadow-[0_12px_30px_-18px_rgba(17,24,39,0.5)]'
+                    : ''
+                }`}
+              >
+                {/* 球体：始终显示，大小随状态微调 */}
+                <motion.div
+                  initial={false}
+                  animate={{
+                    width: showContextHint ? 28 : 36,
+                    height: showContextHint ? 28 : 36,
+                  }}
+                  transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
+                  className={`rounded-full overflow-hidden ring-1 ring-white/70 flex-shrink-0 ${
+                    showContextHint
+                      ? 'shadow-[0_8px_18px_-10px_rgba(15,23,42,0.5)]'
+                      : 'orb-float shadow-[0_10px_22px_-12px_rgba(15,23,42,0.55)]'
+                  }`}
+                >
+                  <video
+                    src={sugarOrb}
+                    className="w-full h-full object-cover"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                  />
+                </motion.div>
+
+                {/* 文字内容：展开时显示 */}
+                <AnimatePresence>
+                  {showContextHint && (
+                    <motion.div
+                      key="hint-text"
+                      initial={{ opacity: 0, width: 0 }}
+                      animate={{ opacity: 1, width: 'auto' }}
+                      exit={{ opacity: 0, width: 0 }}
+                      transition={{ duration: 0.25, ease: 'easeOut' }}
+                      className="flex items-center gap-3 overflow-hidden whitespace-nowrap text-sm text-gray-700"
+                    >
+                      <span className="text-accent-purple font-semibold">Sugar 智能体</span>
+                      <span>正在为你检测随心搭数据</span>
+                      <span className="text-accent-purple font-semibold">查看</span>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
             </button>
+
+            {/* hover 提示：仅默认状态下显示 */}
+            <AnimatePresence>
+              {!showContextHint && isOrbHover && (
+                <motion.div
+                  key="orb-tip"
+                  initial={{ opacity: 0, y: 4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 4 }}
+                  transition={{ duration: 0.15 }}
+                  className="absolute right-0 top-full mt-2 px-3 py-2 rounded-lg bg-white/95 border border-white/80 shadow-[0_12px_26px_-20px_rgba(15,23,42,0.45)] text-xs text-gray-600 whitespace-nowrap pointer-events-none"
+                >
+                  检测到你在编辑周报，即将为你推荐相关资料.
+                </motion.div>
+              )}
+            </AnimatePresence>
           </motion.div>
         )}
       </AnimatePresence>
@@ -1236,13 +1314,13 @@ export default function MainEditor({ docTitle = '未命名文档' }) {
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: 360, opacity: 0 }}
             transition={{ type: 'spring', stiffness: 240, damping: 26 }}
-            className="fixed right-0 top-0 h-screen w-[360px] z-40 bg-white/35 backdrop-blur-[30px] border-l border-white/60 shadow-[0_30px_70px_-30px_rgba(15,23,42,0.4)] overflow-hidden"
+            className="fixed right-0 top-0 h-screen w-[360px] z-40 bg-white/35 backdrop-blur-[30px] border-l border-white/60 shadow-[0_30px_70px_-30px_rgba(15,23,42,0.4)] overflow-hidden flex flex-col"
           >
             <div className="absolute inset-0 pointer-events-none">
               <div className="absolute -inset-[35%] panel-flow bg-[radial-gradient(40%_40%_at_15%_20%,rgba(99,102,241,0.25),transparent_60%),radial-gradient(35%_35%_at_80%_10%,rgba(236,72,153,0.22),transparent_60%),radial-gradient(45%_45%_at_70%_80%,rgba(56,189,248,0.2),transparent_65%)]" />
               <div className="absolute inset-0 bg-gradient-to-b from-white/55 via-white/35 to-white/25" />
             </div>
-            <div ref={contextScrollRef} className="h-full flex flex-col overflow-y-auto">
+            <div ref={contextScrollRef} className="flex-1 min-h-0 flex flex-col overflow-y-auto">
               <div className="sticky top-0 z-10 flex items-center justify-between px-5 pt-5 pb-3 bg-white/60 backdrop-blur-[28px] border-b border-white/60">
                 <div className="flex items-center gap-2">
                   <span className="text-sm font-semibold text-gray-900">Sugar 智能体</span>
@@ -1330,41 +1408,72 @@ export default function MainEditor({ docTitle = '未命名文档' }) {
 
               {contextDone && (
                 <div className="rounded-2xl border border-white/60 bg-white/80 p-4 shadow-[0_14px_30px_-22px_rgba(15,23,42,0.4)]">
-                  <div className="text-sm text-gray-700">iCafe 正在总结当前随心搭相关需求进展...</div>
-                  <div className="mt-4 flex flex-wrap gap-2">
+                  <div className="text-sm text-gray-700">Sugar已汇总"随心搭"本周数据：包含生产侧、消费侧搭建数量，如右图。提供操作：</div>
+                  <div className="mt-3 flex items-center gap-1.5">
                     <button
                       onClick={handleContextInsert}
-                      className="px-3 py-1.5 text-xs rounded-full bg-accent-purple text-white hover:bg-accent-purple-dark transition-colors"
+                      className="px-2.5 py-1 text-xs rounded-full bg-accent-purple text-white hover:bg-accent-purple-dark transition-colors"
                     >
                       插入
                     </button>
                     <button
                       onClick={handleContextEdit}
-                      className="px-3 py-1.5 text-xs rounded-full border border-gray-200 text-gray-700 hover:bg-gray-50 transition-colors"
+                      className="px-2.5 py-1 text-xs rounded-full border border-gray-200 text-gray-700 hover:bg-gray-50 transition-colors"
                     >
                       编辑
                     </button>
                     <button
                       onClick={handleContextLocate}
-                      className="px-3 py-1.5 text-xs rounded-full border border-gray-200 text-gray-700 hover:bg-gray-50 transition-colors"
+                      className="px-2.5 py-1 text-xs rounded-full border border-gray-200 text-gray-700 hover:bg-gray-50 transition-colors"
                     >
                       定位
                     </button>
                     <button
                       onClick={handleContextRegenerate}
-                      className="px-3 py-1.5 text-xs rounded-full border border-gray-200 text-gray-700 hover:bg-gray-50 transition-colors"
+                      className="px-2.5 py-1 text-xs rounded-full border border-gray-200 text-gray-700 hover:bg-gray-50 transition-colors"
                     >
                       重新生成
                     </button>
                     <button
                       onClick={() => setContextPanelOpen(false)}
-                      className="px-3 py-1.5 text-xs rounded-full border border-gray-200 text-gray-500 hover:bg-gray-50 transition-colors"
+                      className="px-2.5 py-1 text-xs rounded-full border border-gray-200 text-gray-500 hover:bg-gray-50 transition-colors"
                     >
                       丢弃
                     </button>
                   </div>
                 </div>
               )}
+              </div>
+            </div>
+
+            {/* 底部 AI 输入框 */}
+            <div className="shrink-0 px-4 pb-4 pt-2 border-t border-white/50 bg-white/50 backdrop-blur-md">
+              <div className="rounded-xl bg-white/90 border border-gray-200/80 px-3 py-3 shadow-sm">
+                <input
+                  type="text"
+                  placeholder="输入你的问题..."
+                  className="w-full text-sm bg-transparent outline-none placeholder:text-gray-300 mb-3"
+                />
+                <div className="flex items-center gap-2">
+                  <button className="w-6 h-6 flex items-center justify-center rounded-md hover:bg-gray-100 transition-colors text-gray-500">
+                    <Plus size={16} />
+                  </button>
+                  <div className="h-4 w-px bg-gray-200" />
+                  <button className="flex items-center gap-1 px-1.5 py-0.5 rounded-md hover:bg-gray-100 transition-colors text-xs text-gray-600">
+                    <Sparkles size={12} className="text-accent-purple" />
+                    <span>GPT-4o</span>
+                    <ChevronDown size={10} />
+                  </button>
+                  <button className="flex items-center gap-1 px-1.5 py-0.5 rounded-md hover:bg-gray-100 transition-colors text-xs text-gray-600">
+                    <Zap size={12} className="text-amber-500" />
+                    <span>能力</span>
+                    <ChevronDown size={10} />
+                  </button>
+                  <div className="flex-1" />
+                  <button className="w-6 h-6 flex items-center justify-center rounded-md bg-accent-purple text-white hover:bg-accent-purple-dark transition-colors">
+                    <Send size={12} />
+                  </button>
+                </div>
               </div>
             </div>
           </motion.aside>

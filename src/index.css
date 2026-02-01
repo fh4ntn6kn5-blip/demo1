@@ -139,3 +139,33 @@
   z-index: 1;
   border-radius: 999px;
 }
+
+@keyframes orbFloat {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
+.orb-float {
+  animation: orbFloat 4s ease-in-out infinite;
+}
+
+@keyframes hintSweep {
+  0% { transform: translateX(-120%); opacity: 0; }
+  20% { opacity: 1; }
+  100% { transform: translateX(120%); opacity: 0; }
+}
+
+.hint-ai {
+  position: relative;
+  overflow: hidden;
+}
+
+.hint-ai::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent, rgba(99,102,241,0.2), transparent);
+  animation: hintSweep 900ms ease-in-out;
+  pointer-events: none;
+}
