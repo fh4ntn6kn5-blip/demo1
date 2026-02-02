@@ -3,7 +3,7 @@ import Sidebar from './components/Sidebar'
 import MainEditor from './components/MainEditor'
 
 export default function App() {
-  const [currentDoc, setCurrentDoc] = useState('模拟场景-知识库团队周报')
+  const [currentDoc, setCurrentDoc] = useState('李港组团队周报')
   const [selectedDocName, setSelectedDocName] = useState(null)
 
   return (

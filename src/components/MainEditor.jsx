@@ -1303,7 +1303,7 @@ export default function MainEditor({ docTitle = '未命名文档' }) {
                       transition={{ duration: 0.25, ease: 'easeOut' }}
                       className="flex items-center gap-3 overflow-hidden whitespace-nowrap text-sm text-gray-700"
                     >
-                      <span className="text-gray-700">Sugar已为你总结本周"随心搭"相关数据</span>
+                      <span className="text-gray-700">已为你总结本周核心产品数据</span>
                       <span className="text-accent-purple font-semibold">查看</span>
                     </motion.div>
                   )}
@@ -1347,8 +1347,7 @@ export default function MainEditor({ docTitle = '未命名文档' }) {
             <div ref={contextScrollRef} className="flex-1 min-h-0 flex flex-col overflow-y-auto">
               <div className="sticky top-0 z-10 flex items-center justify-between px-5 pt-5 pb-3 bg-white/60 backdrop-blur-[28px] border-b border-white/60">
                 <div className="flex items-center gap-2">
-                  <span className="text-sm font-semibold text-gray-900">Sugar 智能体</span>
-                  <span className="text-[11px] text-gray-500">环境感知</span>
+                  <span className="text-sm font-semibold text-gray-900">智能创作</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <button
